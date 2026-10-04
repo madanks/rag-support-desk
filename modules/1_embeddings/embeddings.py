@@ -1,13 +1,12 @@
 import json
 import os
+from pathlib import Path
 # OpenAI API client for generating embeddings
 from openai import OpenAI
 # For numerical operations on embedding vectors
 import numpy as np
 # Measure similarity between vectors
 from sklearn.metrics.pairwise import cosine_similarity
-# For visualizing embeddings
-import matplotlib.pyplot as plt
 # Load environment variables from .env file
 from dotenv import load_dotenv
 
@@ -36,7 +35,9 @@ print(f"Using OpenAI model: {embedding_model}")
 # LOAD DATA: For now Mock Support Tickets
 # =============================================================================
 print("\nLoading support tickets...")
-with open('../../data/mock_tickets.json', 'r') as f:
+DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "mock_tickets.json"
+
+with open(DATA_PATH, 'r', encoding='utf-8') as f:
     tickets = json.load(f)
 print(f"Loaded {len(tickets)} support tickets")
 
